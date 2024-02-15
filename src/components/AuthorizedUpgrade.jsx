@@ -1,4 +1,3 @@
-// ListPublicProposals.js
 import React from 'react';
 import GenericFetchingComponent from './GenericFetchingComponent';
 
