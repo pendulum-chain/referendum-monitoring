@@ -8,7 +8,7 @@ import SchedulerList from './components/Scheduled';
 import {Pendulum_WS, Amplitude_WS} from "./constants";
 import { ApiProvider } from './utils/ApiContext';
 import AuthorizedUpgrade from './components/AuthorizedUpgrade';
-
+import OpenReferenda from './components/OpenReferenda';
 function App() {
   const [wsUrl, setWsUrl] = useState(Pendulum_WS);
   const [currentNetwork, setCurrentNetwork] = useState("pendulum");
@@ -51,6 +51,12 @@ function App() {
               <h2>Technical Comittee Proposals</h2>
               <ListCouncilProposals  palletName="technicalCommittee"  />
             </div>
+          </div>
+        </div>
+        <div className="scheduler">
+          <div className="scheduler-content">
+            <h2>Open Referenda</h2>
+            <OpenReferenda />
           </div>
         </div>
         <div className="scheduler">
