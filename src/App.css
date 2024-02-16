@@ -79,9 +79,32 @@
   height: calc(100% - 20px); 
   box-sizing: border-box;
 }
-button {
+
+.network-button.selected-network {
+  transform: scale(1.15); 
+  box-shadow: 0 0 10px #7cb7fa; 
+}
+
+
+.network-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0 10px;
   padding: 10px 20px;
+  background-color: #acb5c6;
+  color: #282c34; 
+  border: none; 
+  cursor: pointer; 
+  border-radius: 5px; 
+  transition: all 0.3s ease; 
+}
+
+.network-icon {
+  width: 30px; 
+  height: auto; 
+  margin-right: 8px; 
+  fill: #61dafb; 
 }
 
 @media (max-width: 1450px) {
@@ -166,3 +189,4 @@ button {
 .error-message {
   margin-top: 10px;
 }
+

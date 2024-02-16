@@ -9,6 +9,7 @@ import {Pendulum_WS, Amplitude_WS} from "./constants";
 import { ApiProvider } from './utils/ApiContext';
 import AuthorizedUpgrade from './components/AuthorizedUpgrade';
 import OpenReferenda from './components/OpenReferenda';
+import { PendulumNaked, AmplitudeNaked } from './assets/logos';
 function App() {
   const [wsUrl, setWsUrl] = useState(Pendulum_WS);
   const [currentNetwork, setCurrentNetwork] = useState("pendulum");
@@ -23,15 +24,17 @@ function App() {
       <div className="App">
       <header className="App-header">
           <button
-            className={currentNetwork === "pendulum" ? "selected-network" : ""}
+            className={`network-button ${currentNetwork === "pendulum" ? "selected-network" : ""}`}
             onClick={() => handleDataVersionChange(Pendulum_WS, "pendulum")}
           >
+            <PendulumNaked className="network-icon" />
             Pendulum
           </button>
           <button
-            className={currentNetwork === "amplitude" ? "selected-network" : ""}
+             className={`network-button ${currentNetwork === "amplitude" ? "selected-network" : ""}`}
             onClick={() => handleDataVersionChange(Amplitude_WS, "amplitude")}
           >
+            <AmplitudeNaked className="network-icon" />
             Amplitude
           </button>
         </header>
