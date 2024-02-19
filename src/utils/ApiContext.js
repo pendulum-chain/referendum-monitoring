@@ -10,36 +10,50 @@ export const ApiProvider = ({ children, wsUrl, currentNetwork }) => {
   useEffect(() => {
     setApi(null);
     setApiError(null);
-
+    console.log("ApiProvider: wsUrl", wsUrl);
     const initApi = async () => {
       let networkWhenSelected = currentNetwork;
-      try {
-        const provider = new WsProvider(wsUrl);
+      let provider = null;
+      for (let i = 0; i < wsUrl.length; i++) {
+        try {
+          
+          console.log(`Trying to initialize API with ${wsUrl[i]}`)
+          provider = new WsProvider(wsUrl[i]);
 
-        const timeoutPromise = new Promise((_, reject) =>
-          setTimeout(
-            () => reject(new Error("Timeout: Failed to initialize API")),
-            10000,
-          ),
-        );
+          provider.on('error', () => {
+            console.log(`Error with provider for URL: ${wsUrl[i]}`);
+            provider.disconnect(); 
+            provider = null; 
+          });
+         
+          const timeoutPromise = new Promise((_, reject) =>
+            setTimeout(
+              () => reject(new Error("Timeout: Failed to initialize API")),
+              10000, 
+            ),
+          );
 
-        const apiPromise = ApiPromise.create({ provider });
+          const apiPromise = ApiPromise.create({ provider });
 
-        const api = await Promise.race([apiPromise, timeoutPromise]);
+          const api = await Promise.race([apiPromise, timeoutPromise]);
 
-        setApi({ api, network: networkWhenSelected });
-      } catch (error) {
-        console.log("failed to initialize API");
-        console.error(error);
-        setApiError({
-          msg: "Failed to initialize API",
-          network: networkWhenSelected,
-        });
+          return setApi({ api, network: networkWhenSelected });
+        } catch (error) {
+          console.log(`Failed to initialize API with ${wsUrl[i]}`);
+          console.error(error);
+
+          if (i === wsUrl.length - 1) {
+            setApiError({
+              msg: "Failed to initialize API with all provided URLs",
+              network: networkWhenSelected,
+            });
+          }
+        }
       }
     };
 
     initApi();
-  }, [currentNetwork, wsUrl]);
+  }, [currentNetwork, wsUrl]); 
 
   return (
     <ApiContext.Provider value={{ api, currentNetwork, apiError }}>
