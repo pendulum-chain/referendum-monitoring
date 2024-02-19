@@ -16,20 +16,19 @@ export const ApiProvider = ({ children, wsUrl, currentNetwork }) => {
       let provider = null;
       for (let i = 0; i < wsUrl.length; i++) {
         try {
-          
-          console.log(`Trying to initialize API with ${wsUrl[i]}`)
+          console.log(`Trying to initialize API with ${wsUrl[i]}`);
           provider = new WsProvider(wsUrl[i]);
 
-          provider.on('error', () => {
+          provider.on("error", () => {
             console.log(`Error with provider for URL: ${wsUrl[i]}`);
-            provider.disconnect(); 
-            provider = null; 
+            provider.disconnect();
+            provider = null;
           });
-         
+
           const timeoutPromise = new Promise((_, reject) =>
             setTimeout(
               () => reject(new Error("Timeout: Failed to initialize API")),
-              10000, 
+              10000,
             ),
           );
 
@@ -53,7 +52,7 @@ export const ApiProvider = ({ children, wsUrl, currentNetwork }) => {
     };
 
     initApi();
-  }, [currentNetwork, wsUrl]); 
+  }, [currentNetwork, wsUrl]);
 
   return (
     <ApiContext.Provider value={{ api, currentNetwork, apiError }}>

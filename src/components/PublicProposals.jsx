@@ -8,7 +8,7 @@ const fetchData = async (api) => {
     .toHuman()
     .map((item) => {
       // Destructure to get the BoundedCallOf<T> value
-      let [, boundedCall,] = item;
+      let [, boundedCall] = item;
 
       if (boundedCall.Lookup) {
         return boundedCall.Lookup.hash_;
