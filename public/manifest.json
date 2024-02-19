@@ -1,8 +1,7 @@
 {
   "short_name": "Referendum Monitoring",
   "name": "Dashboard for democracy monitoring",
-  "icons": [
-  ],
+  "icons": [],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",

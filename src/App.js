@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import ListPublicProposals from './components/PublicProposals';
-import ExternalProposal from './components/ExternalProposals';
-import ListCouncilProposals from './components/CouncilProposals';
-import SchedulerList from './components/Scheduled';
-import {Pendulum_WS, Amplitude_WS} from "./constants";
-import { ApiProvider } from './utils/ApiContext';
-import AuthorizedUpgrade from './components/AuthorizedUpgrade';
-import OpenReferenda from './components/OpenReferenda';
-import { PendulumNaked, AmplitudeNaked } from './assets/logos';
+import React, { useState } from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import ListPublicProposals from "./components/PublicProposals";
+import ExternalProposal from "./components/ExternalProposals";
+import ListCouncilProposals from "./components/CouncilProposals";
+import SchedulerList from "./components/Scheduled";
+import { Pendulum_WS, Amplitude_WS } from "./constants";
+import { ApiProvider } from "./utils/ApiContext";
+import AuthorizedUpgrade from "./components/AuthorizedUpgrade";
+import OpenReferenda from "./components/OpenReferenda";
+import { PendulumNaked, AmplitudeNaked } from "./assets/logos";
 function App() {
   const [wsUrl, setWsUrl] = useState(Pendulum_WS);
   const [currentNetwork, setCurrentNetwork] = useState("pendulum");
 
   const handleDataVersionChange = (newUrl, currentNetwork) => {
-    setWsUrl(newUrl); 
-    setCurrentNetwork(currentNetwork)
+    setWsUrl(newUrl);
+    setCurrentNetwork(currentNetwork);
   };
 
   return (
-    <ApiProvider wsUrl={wsUrl}  currentNetwork={currentNetwork}>
+    <ApiProvider wsUrl={wsUrl} currentNetwork={currentNetwork}>
       <div className="App">
-      <header className="App-header">
+        <header className="App-header">
           <button
             className={`network-button ${currentNetwork === "pendulum" ? "selected-network" : ""}`}
             onClick={() => handleDataVersionChange(Pendulum_WS, "pendulum")}
@@ -31,7 +31,7 @@ function App() {
             Pendulum
           </button>
           <button
-             className={`network-button ${currentNetwork === "amplitude" ? "selected-network" : ""}`}
+            className={`network-button ${currentNetwork === "amplitude" ? "selected-network" : ""}`}
             onClick={() => handleDataVersionChange(Amplitude_WS, "amplitude")}
           >
             <AmplitudeNaked className="network-icon" />
@@ -42,17 +42,17 @@ function App() {
           <div className="panel left-panel">
             <div className="panel-content">
               <h2>Public Proposals</h2>
-                <ListPublicProposals />
+              <ListPublicProposals />
               <h2>External Proposal</h2>
-                <ExternalProposal />
+              <ExternalProposal />
             </div>
           </div>
           <div className="panel right-panel">
             <div className="panel-content">
               <h2>Council Proposals</h2>
-              <ListCouncilProposals palletName="council"  />
+              <ListCouncilProposals palletName="council" />
               <h2>Technical Comittee Proposals</h2>
-              <ListCouncilProposals  palletName="technicalCommittee"  />
+              <ListCouncilProposals palletName="technicalCommittee" />
             </div>
           </div>
         </div>
@@ -71,7 +71,7 @@ function App() {
         <div className="scheduler">
           <div className="scheduler-content">
             <h2>Scheduled Tasks</h2>
-            <SchedulerList/>
+            <SchedulerList />
           </div>
         </div>
       </div>
