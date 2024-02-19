@@ -10,6 +10,7 @@ import { ApiProvider } from "./utils/ApiContext";
 import AuthorizedUpgrade from "./components/AuthorizedUpgrade";
 import OpenReferenda from "./components/OpenReferenda";
 import { PendulumNaked, AmplitudeNaked } from "./assets/logos";
+
 function App() {
   const [wsUrl, setWsUrl] = useState(Pendulum_WS);
   const [currentNetwork, setCurrentNetwork] = useState("pendulum");

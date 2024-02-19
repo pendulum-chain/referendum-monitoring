@@ -39,7 +39,7 @@ export const ApiProvider = ({ children, wsUrl, currentNetwork }) => {
     };
 
     initApi();
-  }, [wsUrl]);
+  }, [currentNetwork, wsUrl]);
 
   return (
     <ApiContext.Provider value={{ api, currentNetwork, apiError }}>

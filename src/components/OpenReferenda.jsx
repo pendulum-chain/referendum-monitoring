@@ -3,7 +3,7 @@ import GenericFetchingComponent from "./GenericFetchingComponent";
 import { useApi } from "../utils/ApiContext";
 
 const OpenReferenda = () => {
-  const { api, currentNetwork } = useApi();
+  const { currentNetwork } = useApi();
 
   const fetchData = async (api) => {
     const data = await api.query.democracy.referendumInfoOf.entries();

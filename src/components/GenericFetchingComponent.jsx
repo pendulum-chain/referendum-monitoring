@@ -36,7 +36,7 @@ const GenericFetchingComponent = ({ renderContent, fetchData }) => {
     };
 
     getData();
-  }, [api, fetchData]);
+  }, [api, fetchData, lastNetworkSelected]);
 
   useEffect(() => {
     if (apiError) {
@@ -46,7 +46,7 @@ const GenericFetchingComponent = ({ renderContent, fetchData }) => {
       setError(apiError.msg);
       setIsLoading(false);
     }
-  }, [apiError]);
+  }, [apiError, lastNetworkSelected]);
 
   useEffect(() => {
     console.log("last network selected", currentNetwork);
