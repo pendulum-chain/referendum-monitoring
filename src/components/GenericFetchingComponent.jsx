@@ -49,7 +49,6 @@ const GenericFetchingComponent = ({ renderContent, fetchData }) => {
   }, [apiError, lastNetworkSelected]);
 
   useEffect(() => {
-    console.log("last network selected", currentNetwork);
     setLastNetworkSelected(currentNetwork);
   }, [currentNetwork]);
 
