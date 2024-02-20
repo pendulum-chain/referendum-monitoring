@@ -12,16 +12,16 @@ import OpenReferenda from "./components/OpenReferenda";
 import { PendulumNaked, AmplitudeNaked } from "./assets/logos";
 
 function App() {
-  const [wsUrl, setWsUrl] = useState(Pendulum_WS);
+  const [wsUrls, setWsUrls] = useState(Pendulum_WS);
   const [currentNetwork, setCurrentNetwork] = useState("pendulum");
 
   const handleDataVersionChange = (newUrl, currentNetwork) => {
-    setWsUrl(newUrl);
+    setWsUrls(newUrl);
     setCurrentNetwork(currentNetwork);
   };
 
   return (
-    <ApiProvider wsUrl={wsUrl} currentNetwork={currentNetwork}>
+    <ApiProvider wsUrls={wsUrls} currentNetwork={currentNetwork}>
       <div className="App">
         <header className="App-header">
           <button

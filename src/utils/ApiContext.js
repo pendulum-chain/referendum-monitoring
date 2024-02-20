@@ -3,24 +3,25 @@ import { ApiPromise, WsProvider } from "@polkadot/api";
 
 const ApiContext = createContext();
 
-export const ApiProvider = ({ children, wsUrl, currentNetwork }) => {
+export const ApiProvider = ({ children, wsUrls, currentNetwork }) => {
   const [api, setApi] = useState(null);
   const [apiError, setApiError] = useState(null);
 
   useEffect(() => {
     setApi(null);
     setApiError(null);
-    console.log("ApiProvider: wsUrl", wsUrl);
+    console.log("ApiProvider: wsUrls", wsUrls);
+
     const initApi = async () => {
       let networkWhenSelected = currentNetwork;
       let provider = null;
-      for (let i = 0; i < wsUrl.length; i++) {
+      for (let i = 0; i < wsUrls.length; i++) {
         try {
-          console.log(`Trying to initialize API with ${wsUrl[i]}`);
-          provider = new WsProvider(wsUrl[i]);
+          console.log(`Trying to initialize API with ${wsUrls[i]}`);
+          provider = new WsProvider(wsUrls[i]);
 
           provider.on("error", () => {
-            console.log(`Error with provider for URL: ${wsUrl[i]}`);
+            console.log(`Error with provider for URL: ${wsUrls[i]}`);
             provider.disconnect();
             provider = null;
           });
@@ -38,10 +39,10 @@ export const ApiProvider = ({ children, wsUrl, currentNetwork }) => {
 
           return setApi({ api, network: networkWhenSelected });
         } catch (error) {
-          console.log(`Failed to initialize API with ${wsUrl[i]}`);
+          console.log(`Failed to initialize API with ${wsUrls[i]}`);
           console.error(error);
 
-          if (i === wsUrl.length - 1) {
+          if (i === wsUrls.length - 1) {
             setApiError({
               msg: "Failed to initialize API with all provided URLs",
               network: networkWhenSelected,
@@ -52,7 +53,7 @@ export const ApiProvider = ({ children, wsUrl, currentNetwork }) => {
     };
 
     initApi();
-  }, [currentNetwork, wsUrl]);
+  }, [currentNetwork, wsUrls]);
 
   return (
     <ApiContext.Provider value={{ api, currentNetwork, apiError }}>
