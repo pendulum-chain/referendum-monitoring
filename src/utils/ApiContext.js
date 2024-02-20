@@ -10,15 +10,13 @@ export const ApiProvider = ({ children, wsUrls, currentNetwork }) => {
   useEffect(() => {
     setApi(null);
     setApiError(null);
-    console.log("ApiProvider: wsUrls", wsUrls);
 
     const initApi = async () => {
       let networkWhenSelected = currentNetwork;
-      let provider = null;
       for (let i = 0; i < wsUrls.length; i++) {
         try {
           console.log(`Trying to initialize API with ${wsUrls[i]}`);
-          provider = new WsProvider(wsUrls[i]);
+          let provider = new WsProvider(wsUrls[i]);
 
           provider.on("error", () => {
             console.log(`Error with provider for URL: ${wsUrls[i]}`);
